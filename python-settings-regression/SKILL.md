@@ -1,12 +1,19 @@
 ---
 name: python-settings-regression
-description: Diagnose pydantic-settings extra_forbidden, dotenv alias mismatches, and settings values lost after extra='ignore'. Build value-level regression checks when changing nested aliases or environment-source precedence.
+description: >-
+  Diagnose Pydantic Settings (pydantic-settings) extra_forbidden /
+  "Extra inputs are not permitted" errors caused by dotenv or nested
+  settings alias mismatches. Catch values silently lost after
+  extra='ignore' and verify dotenv fallbacks plus environment-source
+  precedence with value-level regression checks.
 license: MIT
 ---
 
 # Check the settings values, not just construction
 
 Use this skill for Pydantic Settings input-name and source-precedence problems. Preserve the application's intended settings contract; the example's aliases and values are synthetic.
+
+For settings alias mismatches, `Extra inputs are not permitted` is the readable validation message associated with `extra_forbidden`; verify the intended input names and resolved values before suppressing the error.
 
 ## Diagnose the contract
 
