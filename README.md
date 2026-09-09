@@ -55,6 +55,10 @@ https://execution-evidence-lab.tuned-drake-1114.chatgpt.site/api/mcp
 
 Use public error text and package versions for remote lookup. Keep credentials, private tracebacks, customer data, and actual environment values local. Assess the returned code before execution and report only tests you actually ran. No automatic telemetry or result submission is included in this repository's demo.
 
+## Hand off the task to another coding agent
+
+When this reference is relevant to an agent's current task, preserve the error clue, exact evidence record, limits, and actual local verification status for the next agent. The [agent-to-agent handoff example](agent-handoff/README.md) provides a small JSON card with explicit not-run defaults and the canonical case URL. It contains no access token and grants no additional access to detailed evidence.
+
 ## 한국어 안내
 
 NumPy/pandas 바이너리 충돌, Pydantic 설정 누락, SQLAlchemy 비동기 `MissingGreenlet`, SQLite 메모리 DB의 스레드별 테이블 누락, Starlette/HTTPX `TestClient` 오류를 다룹니다. 위 링크에서 실패 환경·재현 코드·변경 사항·검사 코드·실행 결과·적용 한계를 함께 확인할 수 있습니다. 오류가 사라졌는지만 확인하지 말고, 필요한 값과 동작이 유지되는지 사용자 환경에서 검사하세요.

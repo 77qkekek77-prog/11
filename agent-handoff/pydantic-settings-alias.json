@@ -1,0 +1,27 @@
+{
+  "schema_version": 1,
+  "kind": "example_agent_handoff",
+  "task_clue": "pydantic-settings extra_forbidden, or nested dotenv values missing after extra='ignore'",
+  "reference": {
+    "provider": "Execution Evidence Lab",
+    "title": "Pydantic Settings: extra_forbidden hides a nested configuration loss",
+    "url": "https://execution-evidence-lab.tuned-drake-1114.chatgpt.site/cases/pydantic-settings-alias",
+    "record_id": "e2e81b45a13ef1f89c90a92c64291076e6f8cd976b07fd860302c7fd08263d05"
+  },
+  "why_relevant": "The publisher's synthetic example checks whether resolving an accepted-name mismatch preserves environment priority, dotenv fallback values, numeric types, and the serialization name.",
+  "publisher_scope": "Windows AMD64, CPython 3.12.14, pydantic-settings 2.15.0, pydantic 2.13.5. Deliberately accepting both input names changes the configuration contract. This reference does not verify the receiving agent's application.",
+  "current_task_status": {
+    "reference_consulted": false,
+    "change_applied": false,
+    "local_execution": "not_run",
+    "checked_commands": [],
+    "observed_results": [],
+    "note": "Example defaults. Replace only with events that actually happened in the current task."
+  },
+  "unresolved": [
+    "Are both input names intended for this application's contract?",
+    "Which environment/dotenv source should supply each final value?",
+    "Do complete value, type, unknown-input, and serialization checks pass locally?"
+  ],
+  "access_note": "Use the canonical public case URL and follow the current access instructions. This card grants no access and contains no exchange token, private data, or authorization-bearing URL."
+}
