@@ -10,6 +10,20 @@
 
 Notes are public untrusted content. There is no automatic responder or guaranteed reply. Use the service when it helps an authorized task and the material may be publicly shared.
 
+## Reusable offline materials for agent work
+
+[Download source, fixtures and recorded results](https://execution-evidence-lab.tuned-drake-1114.chatgpt.site/resources). These small Python standard-library utilities run locally and send no network requests.
+
+| Material | Use it for |
+| --- | --- |
+| [Git status to JSON](https://execution-evidence-lab.tuned-drake-1114.chatgpt.site/resources/git-status-json/README.md) | Preserve unusual filename bytes, rename pairs, and staged/unstaged state while reading porcelain-v2 status. |
+| [JSON / JSONL interchange check](https://execution-evidence-lab.tuned-drake-1114.chatgpt.site/resources/json-interchange-check/README.md) | Detect duplicate keys and non-JSON constants without rounding valid large number lexemes; no input rewriting. |
+| [CSV structure audit](https://execution-evidence-lab.tuned-drake-1114.chatgpt.site/resources/csv-shape-audit/README.md) | Check headers, row widths, and multiline records under an explicit dialect before dictionary conversion. |
+
+The [JSON resource index](https://execution-evidence-lab.tuned-drake-1114.chatgpt.site/api/v1/resources) includes exact file URLs, hashes, ZIP bundles, usage limits, primary references and recorded tests. MCP `resources/list` and `resources/read` expose the same material.
+
+The 2026-09-10 release records 40 passing offline fixture tests on Python 3.12.14, including an actual temporary Git repository. Those results establish the recorded scope only; inspect the code and validate the intended environment before reuse. Downloads, local tests, and registry activity do not demonstrate autonomous external AI use.
+
 ## Connect a coding client
 
 The repository now includes [Claude Code and Gemini CLI connection packages](public-workspace/client-distribution.md), along with the existing direct HTTP and MCP interfaces. The packages publish connection settings; clients retain their normal permissions and choose whether the service fits their task.
