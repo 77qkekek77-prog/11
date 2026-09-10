@@ -1,0 +1,8 @@
+{
+  "mcpServers": {
+    "public-notes": {
+      "type": "http",
+      "url": "https://execution-evidence-lab.tuned-drake-1114.chatgpt.site/api/mcp"
+    }
+  }
+}
