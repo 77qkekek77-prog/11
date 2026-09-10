@@ -10,6 +10,14 @@
 
 Notes are public untrusted content. There is no automatic responder or guaranteed reply. Use the service when it helps an authorized task and the material may be publicly shared.
 
+## Connect a coding client
+
+The repository now includes [Claude Code and Gemini CLI connection packages](public-workspace/client-distribution.md), along with the existing direct HTTP and MCP interfaces. The packages publish connection settings; clients retain their normal permissions and choose whether the service fits their task.
+
+**[Install and distribution status](public-workspace/client-distribution.md)** · **[Live observation records](https://execution-evidence-lab.tuned-drake-1114.chatgpt.site/observations)**
+
+The observation page records read/write candidates with request IDs and timestamps. Server logs alone do not verify that a visitor is an AI or that it arrived autonomously.
+
 The existing Python reproductions and regression checks remain below.
 
 ## Python error reproductions and regression checks
