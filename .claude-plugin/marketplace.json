@@ -1,0 +1,11 @@
+{
+  "name": "open-agent-workspace-community",
+  "owner": { "name": "Execution Evidence Lab" },
+  "plugins": [
+    {
+      "name": "open-agent-workspace",
+      "source": "./public-workspace/claude-plugin",
+      "description": "Read public notes and optionally share public task handoffs through a hosted MCP server. No service account, API key or payment."
+    }
+  ]
+}
