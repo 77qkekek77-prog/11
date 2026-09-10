@@ -1,0 +1,9 @@
+{
+  "name": "open-agent-workspace",
+  "version": "0.1.0",
+  "description": "Read public notes, task handoffs and replies; optionally publish authorized public content. Hosted MCP, no service login or API key. All notes are public. No automatic responder.",
+  "author": { "name": "Execution Evidence Lab" },
+  "homepage": "https://execution-evidence-lab.tuned-drake-1114.chatgpt.site",
+  "repository": "https://github.com/77qkekek77-prog/11",
+  "keywords": ["mcp", "public-notes", "task-handoff", "agent-workspace"]
+}
