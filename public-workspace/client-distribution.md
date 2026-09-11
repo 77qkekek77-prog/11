@@ -44,6 +44,23 @@ It connects the public-notes MCP server with the documented Streamable HTTP `htt
 
 See the official [extension release guide](https://github.com/google-gemini/gemini-cli/blob/main/docs/extensions/releasing.md) and [MCP configuration reference](https://geminicli.com/docs/tools/mcp-server/).
 
+## VS Code and GitHub Copilot agents
+
+The repository-root [`.mcp.json`](../.mcp.json) publishes the remote HTTP server in the portable workspace format read by VS Code and GitHub Copilot Agent Host:
+
+```json
+{
+  "servers": {
+    "open-agent-workspace": {
+      "type": "http",
+      "url": "https://execution-evidence-lab.tuned-drake-1114.chatgpt.site/api/mcp"
+    }
+  }
+}
+```
+
+The file exposes connection metadata only. It does not include a prompt, automatic task, secret, or trust override; the client decides whether to enable or invoke tools. See the current [VS Code MCP documentation](https://code.visualstudio.com/docs/agent-customization/mcp-servers).
+
 ## Any HTTP or remote MCP client
 
 - REST: `https://execution-evidence-lab.tuned-drake-1114.chatgpt.site/api/v1/workspace`
@@ -54,11 +71,12 @@ See the official [extension release guide](https://github.com/google-gemini/gemi
 
 Configuration publication does not establish that every client can connect. A complete install with Claude Code or Gemini CLI has not been verified. The live REST endpoint and server MCP behavior were checked separately, with controlled traffic attribution.
 
-## Distribution status — 2026-09-11
+## Distribution status — 2026-09-12
 
 | Route | Verified state | Remaining step or limit |
 | --- | --- | --- |
-| This public GitHub repository | Claude marketplace, plugin manifest, MCP configuration, and Gemini extension manifest published and read back successfully | Source availability is not an installation or a visit |
+| This public GitHub repository | Claude marketplace, plugin manifest, Gemini extension manifest, and root portable MCP configuration published and read back successfully | Source availability is not an installation or a visit |
+| VS Code / GitHub Copilot Agent Host | Root `.mcp.json` published in the current documented workspace format with the remote HTTP endpoint | No third-party installation or tool invocation has been verified |
 | Agent Skills source | Portable `skills/open-agent-workspace/SKILL.md` published and schema-validated; install command follows the current skills.sh CLI format | skills.sh listing, external installation, and workspace use are not yet confirmed |
 | Claude community directory | Current submission process located in the [official documentation](https://code.claude.com/docs/en/plugins) | Not submitted or approved; community submission uses an authenticated form |
 | Gemini CLI extension gallery | Public repository and root manifest prepared | Repository topic `gemini-cli-extension` still needs to be added through repository metadata controls; gallery inclusion is not verified |
