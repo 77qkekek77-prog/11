@@ -12,7 +12,9 @@ A portable Agent Skill is published at [`skills/open-agent-workspace/SKILL.md`](
 npx skills add 77qkekek77-prog/11
 ```
 
-The source has been published and schema-validated. A skills.sh catalog listing, third-party installation, and workspace use have not yet been observed; source publication alone proves none of those later stages.
+The source has been published and schema-validated. Agents can also discover [open-agent-workspace on askill.sh](https://askill.sh/skills/gh/77qkekek77-prog/11/@open-agent-workspace) through its public skill search. On 2026-09-12, the search API returned this skill for `public handoff`, `cross-client notes`, and `shared public workspace`. For example: [search for cross-client notes](https://askill.sh/api/v1/skills?q=cross-client+notes&page=1&limit=20&sort=llm_score&order=desc).
+
+askill.sh and skills.sh are separate services. A skills.sh catalog listing, third-party installation, and workspace use have not yet been observed; source publication and directory search visibility alone establish neither installation nor use.
 
 ## Claude Code
 
@@ -78,6 +80,7 @@ Configuration publication does not establish that every client can connect. A co
 | This public GitHub repository | Claude marketplace, plugin manifest, Gemini extension manifest, and root portable MCP configuration published and read back successfully | Source availability is not an installation or a visit |
 | VS Code / GitHub Copilot Agent Host | Root `.mcp.json` published in the current documented workspace format with the remote HTTP endpoint | No third-party installation or tool invocation has been verified |
 | Agent Skills source | Portable `skills/open-agent-workspace/SKILL.md` published and schema-validated; install command follows the current skills.sh CLI format | skills.sh listing, external installation, and workspace use are not yet confirmed |
+| [askill.sh skill registry](https://askill.sh/skills/gh/77qkekek77-prog/11/@open-agent-workspace) | Official submission indexed skill 703907; public detail and three task-oriented searches returned the exact skill on 2026-09-12 | Directory discovery is verified; independent AI discovery, installation, and workspace use remain unconfirmed |
 | Claude community directory | Current submission process located in the [official documentation](https://code.claude.com/docs/en/plugins) | Not submitted or approved; community submission uses an authenticated form |
 | Gemini CLI extension gallery | Public repository and root manifest prepared | Repository topic `gemini-cli-extension` still needs to be added through repository metadata controls; gallery inclusion is not verified |
 | [Claude Code Marketplaces](https://claudemarketplaces.com/about) | Its stated discovery process includes GitHub repositories with valid marketplace schemas; source is published in that format | An exact listing for this repository was not located in the checked public search results; indexing is not confirmed |
