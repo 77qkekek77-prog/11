@@ -36,7 +36,7 @@ The existing Python reproductions and regression checks remain below.
 
 ## Python error reproductions and regression checks
 
-Reproduce a Python library or configuration failure, inspect the change, and check whether the resulting values and behavior are correct. This repository publishes a runnable Pydantic Settings regression example and a guide to measured evidence for five errors.
+Reproduce a Python library or configuration failure, inspect the change, and check whether the resulting values and behavior are correct. This repository publishes a runnable Pydantic Settings regression example and a guide to measured evidence for six errors.
 
 Maintained by [Execution Evidence Lab / AI 실행검증소](https://execution-evidence-lab.tuned-drake-1114.chatgpt.site). The linked service is free and provides recorded environments, failing examples, changes, check code, measured results, and scope limits. The examples are engineering fixtures; they do not certify your application.
 
@@ -48,9 +48,18 @@ Maintained by [Execution Evidence Lab / AI 실행검증소](https://execution-ev
 | Pydantic Settings `extra_forbidden` / `Extra inputs are not permitted`; missing nested `.env` values after `extra='ignore'` | An environment/dotenv accepted-name mismatch, silent loss of fallback values, and explicit `AliasChoices` repair with source precedence and strict unknown-input checks. Twelve recorded checks. | [Pydantic Settings aliases and lost configuration](https://execution-evidence-lab.tuned-drake-1114.chatgpt.site/cases/pydantic-settings-alias) |
 | SQLAlchemy `MissingGreenlet`: `greenlet_spawn has not been called`; async lazy loading or expired attributes | Explicit async loading, `awaitable_attrs`, `selectinload`, named refresh, `run_sync`, stale values, and attached-session boundaries. Ten recorded checks. | [SQLAlchemy async MissingGreenlet](https://execution-evidence-lab.tuned-drake-1114.chatgpt.site/cases/sqlalchemy-async-missinggreenlet) |
 | SQLite in-memory `no such table` across threads | Shared-connection visibility plus complete transaction serialization. Includes a negative control showing that `StaticPool` alone can still cause cross-checkout rollback. Nine recorded checks. | [SQLite memory database and threads](https://execution-evidence-lab.tuned-drake-1114.chatgpt.site/cases/sqlite-memory-thread) |
+| SQLite `SAVEPOINT` / `RELEASE`: inserted rows survive an outer rollback in Python `sqlite3` | A savepoint released before a real outer `BEGIN` leaves an extra row after a later failure. Explicit `BEGIN` restores exact seed rows; `autocommit=False` is separately checked on Python 3.12. Twelve recorded checks, with early/late-BEGIN and commit controls. | [SQLite savepoints and outer rollback](https://execution-evidence-lab.tuned-drake-1114.chatgpt.site/cases/sqlite-savepoint-outer-rollback) |
 | Starlette `TestClient`: `Client.__init__() got an unexpected keyword argument 'app'` with HTTPX | A historical Starlette 0.36.3 / HTTPX 0.28.1 failure; changing only Starlette to 0.37.2, then testing ASGI lifespan, routes, errors, state, background tasks, and WebSocket behavior. Fifteen recorded checks. | [Starlette / HTTPX TestClient compatibility](https://execution-evidence-lab.tuned-drake-1114.chatgpt.site/cases/starlette-httpx-testclient) |
 
-The linked catalog contained five records and 53 checks when reviewed on 2026-09-09. Package pins describe the recorded experiments, not recommended production versions. Read the complete environment and limitations on each case before adapting it.
+The linked catalog contained six records and 65 checks when reviewed on 2026-09-12. Package pins describe the recorded experiments, not recommended production versions. Read the complete environment and limitations on each case before adapting it.
+
+## SQLite savepoints: rows survive an outer rollback
+
+When a Python `sqlite3` savepoint is released before an outer transaction actually begins, a later rollback can leave the released row in the database. The [recorded reproduction](https://execution-evidence-lab.tuned-drake-1114.chatgpt.site/cases/sqlite-savepoint-outer-rollback) measures this with a disposable file database and a separate read-only connection: three rows remain instead of the two seed rows.
+
+The fixture checks `BEGIN` before `SAVEPOINT`, a `BEGIN` issued too late, `isolation_level=None` without an explicit `BEGIN`, successful commit, and rollback before releasing the savepoint. Python 3.12+ `Connection.autocommit=False` is a separately measured control. Its twelve repair checks were recorded on Linux x86_64, CPython 3.12.14 and SQLite 3.53.1. SQLAlchemy/ORM integration, concurrent use, other runtimes and power-loss durability were not tested.
+
+Use this case when investigating **SQLite savepoint rollback not working**, **rows committed after RELEASE SAVEPOINT**, or **Python sqlite3 outer rollback leaves rows**. These phrases describe the measured failure; a matching search does not establish compatibility with your application.
 
 ## Pydantic Settings: the error disappeared, but did the values survive?
 
@@ -97,7 +106,7 @@ When this reference is relevant to an agent's current task, preserve the error c
 
 ## 한국어 안내
 
-NumPy/pandas 바이너리 충돌, Pydantic 설정 누락, SQLAlchemy 비동기 `MissingGreenlet`, SQLite 메모리 DB의 스레드별 테이블 누락, Starlette/HTTPX `TestClient` 오류를 다룹니다. 위 링크에서 실패 환경·재현 코드·변경 사항·검사 코드·실행 결과·적용 한계를 함께 확인할 수 있습니다. 오류가 사라졌는지만 확인하지 말고, 필요한 값과 동작이 유지되는지 사용자 환경에서 검사하세요.
+NumPy/pandas 바이너리 충돌, Pydantic 설정 누락, SQLAlchemy 비동기 `MissingGreenlet`, SQLite 메모리 DB의 스레드별 테이블 누락, SAVEPOINT 해제 후 바깥 롤백에도 행이 남는 문제, Starlette/HTTPX `TestClient` 오류를 다룹니다. 위 링크에서 실패 환경·재현 코드·변경 사항·검사 코드·실행 결과·적용 한계를 함께 확인할 수 있습니다. 오류가 사라졌는지만 확인하지 말고, 필요한 값과 동작이 유지되는지 사용자 환경에서 검사하세요.
 
 ## License
 
