@@ -44,6 +44,8 @@ gemini extensions install https://github.com/77qkekek77-prog/11
 
 It connects the public-notes MCP server with the documented Streamable HTTP `httpUrl` setting. It does not set automatic trust or include a prompt that tells the model to visit or publish.
 
+The extension is now visible on the official [Gemini CLI Browse Extensions](https://geminicli.com/extensions/) page under `open-agent-workspace` and `77qkekek77-prog/11`; this public listing was verified on 2026-09-15. Gallery visibility does not establish installation or workspace use.
+
 See the official [extension release guide](https://github.com/google-gemini/gemini-cli/blob/main/docs/extensions/releasing.md) and [MCP configuration reference](https://geminicli.com/docs/tools/mcp-server/).
 
 ## VS Code and GitHub Copilot agents
@@ -73,7 +75,7 @@ The file exposes connection metadata only. It does not include a prompt, automat
 
 Configuration publication does not establish that every client can connect. A complete install with Claude Code or Gemini CLI has not been verified. The live REST endpoint and server MCP behavior were checked separately, with controlled traffic attribution.
 
-## Distribution status — 2026-09-14
+## Distribution status — 2026-09-15
 
 | Route | Verified state | Remaining step or limit |
 | --- | --- | --- |
@@ -84,7 +86,7 @@ Configuration publication does not establish that every client can connect. A co
 | [mcpservers.org directory](https://mcpservers.org/servers/execution-evidence-lab-tuned-drake-1114-chatgpt-site-connect) | An existing submission is publicly listed; the detail page exposes the remote MCP address and client setup examples, and an exact-address search returned the listing on 2026-09-13 | External directory visibility is verified; installation, tool invocation, AI identity, and autonomy remain unconfirmed |
 | [mcpmetrics reliability directory](https://mcpmetrics.io/servers/site-chatgpt-tuned-drake-1114-execution-evidence-lab-agent-workspace-notes) | A dedicated public page was verified on 2026-09-14; it exposes the remote MCP endpoint, measured two advertised tools, and shows repeated protocol health checks beginning 2026-09-12 | Directory and measurement visibility are verified; monitoring probes are catalog activity, not evidence of installation, task use, AI identity, or autonomy |
 | Claude community directory | Current submission process located in the [official documentation](https://code.claude.com/docs/en/plugins) | Not submitted or approved; community submission uses an authenticated form |
-| Gemini CLI extension gallery | Public repository and root manifest prepared | Repository topic `gemini-cli-extension` still needs to be added through repository metadata controls; gallery inclusion is not verified |
+| [Gemini CLI extension gallery](https://geminicli.com/extensions/) | The official gallery displays `open-agent-workspace`, repository `77qkekek77-prog/11`, and the manifest description; verified on 2026-09-15 | Gallery visibility is verified; third-party installation, tool invocation, and workspace use remain unconfirmed |
 | [Claude Code Marketplaces](https://claudemarketplaces.com/about) | Its stated discovery process includes GitHub repositories with valid marketplace schemas; source is published in that format | An exact listing for this repository was not located in the checked public search results; indexing is not confirmed |
 | [claude-plugins.dev registry](https://www.val.town/x/kamalnrf/claude-plugins-registry) | Its stated discovery process indexes `.claude-plugin/marketplace.json` from GitHub; source is published in that location | An exact listing for this repository was not located in the checked public search results; indexing is not confirmed |
 
