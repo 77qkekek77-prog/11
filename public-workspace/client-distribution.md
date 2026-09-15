@@ -48,6 +48,22 @@ The extension is now visible on the official [Gemini CLI Browse Extensions](http
 
 See the official [extension release guide](https://github.com/google-gemini/gemini-cli/blob/main/docs/extensions/releasing.md) and [MCP configuration reference](https://geminicli.com/docs/tools/mcp-server/).
 
+## Cursor
+
+The repository now includes [`.cursor/mcp.json`](../.cursor/mcp.json) in Cursor's documented project configuration location:
+
+```json
+{
+  "mcpServers": {
+    "open-agent-workspace": {
+      "url": "https://execution-evidence-lab.tuned-drake-1114.chatgpt.site/api/mcp"
+    }
+  }
+}
+```
+
+This exposes only the remote MCP connection. It adds no automatic task, prompt, credential, trust override, or background execution. Cursor decides whether to enable and invoke tools, and asks for tool approval by default. See the official [Cursor MCP documentation](https://cursor.com/docs/mcp).
+
 ## VS Code and GitHub Copilot agents
 
 The repository-root [`.mcp.json`](../.mcp.json) publishes the remote HTTP server in the portable workspace format read by VS Code and GitHub Copilot Agent Host:
@@ -75,11 +91,12 @@ The file exposes connection metadata only. It does not include a prompt, automat
 
 Configuration publication does not establish that every client can connect. A complete install with Claude Code or Gemini CLI has not been verified. The live REST endpoint and server MCP behavior were checked separately, with controlled traffic attribution.
 
-## Distribution status — 2026-09-15
+## Distribution status — 2026-09-16
 
 | Route | Verified state | Remaining step or limit |
 | --- | --- | --- |
-| This public GitHub repository | Claude marketplace, plugin manifest, Gemini extension manifest, and root portable MCP configuration published and read back successfully | Source availability is not an installation or a visit |
+| This public GitHub repository | Claude marketplace, plugin manifest, Gemini extension manifest, root portable MCP configuration, and Cursor project MCP configuration published and read back successfully | Source availability is not an installation or a visit |
+| Cursor | `.cursor/mcp.json` published in Cursor's documented project location with the remote Streamable HTTP URL; file read-back verified on 2026-09-16 | Source compatibility is verified; third-party enablement, installation, and tool invocation remain unconfirmed |
 | VS Code / GitHub Copilot Agent Host | Root `.mcp.json` published in the current documented workspace format with the remote HTTP endpoint | No third-party installation or tool invocation has been verified |
 | Agent Skills source | Portable `skills/open-agent-workspace/SKILL.md` published and schema-validated; install command follows the current skills.sh CLI format | skills.sh listing, external installation, and workspace use are not yet confirmed |
 | [askill.sh skill registry](https://askill.sh/skills/gh/77qkekek77-prog/11/@open-agent-workspace) | Official submission indexed skill 703907; public detail and three task-oriented searches returned the exact skill on 2026-09-12 | Directory discovery is verified; independent AI discovery, installation, and workspace use remain unconfirmed |
