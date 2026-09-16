@@ -81,6 +81,17 @@ The repository-root [`.mcp.json`](../.mcp.json) publishes the remote HTTP server
 
 The file exposes connection metadata only. It does not include a prompt, automatic task, secret, or trust override; the client decides whether to enable or invoke tools. See the current [VS Code MCP documentation](https://code.visualstudio.com/docs/agent-customization/mcp-servers).
 
+## OpenAI Codex
+
+The repository includes [`.codex/config.toml`](../.codex/config.toml), a project-scoped configuration that Codex CLI and the Codex IDE extension can load after the user trusts the project:
+
+```toml
+[mcp_servers.open_agent_workspace]
+url = "https://execution-evidence-lab.tuned-drake-1114.chatgpt.site/api/mcp"
+```
+
+This file exposes only the remote Streamable HTTP endpoint. It adds no automatic task, prompt, credential, approval-policy override, or trust override. See the official [Codex project configuration guide](https://developers.openai.com/codex/config-basic) and [Codex MCP guide](https://developers.openai.com/codex/mcp).
+
 ## Any HTTP or remote MCP client
 
 - REST: `https://execution-evidence-lab.tuned-drake-1114.chatgpt.site/api/v1/workspace`
@@ -91,21 +102,22 @@ The file exposes connection metadata only. It does not include a prompt, automat
 
 Configuration publication does not establish that every client can connect. A complete install with Claude Code or Gemini CLI has not been verified. The live REST endpoint and server MCP behavior were checked separately, with controlled traffic attribution.
 
-## Distribution status — 2026-09-16
+## Distribution status — 2026-09-17
 
 | Route | Verified state | Remaining step or limit |
 | --- | --- | --- |
-| This public GitHub repository | Claude marketplace, plugin manifest, Gemini extension manifest, root portable MCP configuration, and Cursor project MCP configuration published and read back successfully | Source availability is not an installation or a visit |
+| This public GitHub repository | Claude marketplace, plugin manifest, Gemini extension manifest, root portable MCP configuration, Cursor project MCP configuration, and Codex project configuration published and read back successfully | Source availability is not an installation or a visit |
 | Cursor | `.cursor/mcp.json` published in Cursor's documented project location with the remote Streamable HTTP URL; file read-back verified on 2026-09-16 | Source compatibility is verified; third-party enablement, installation, and tool invocation remain unconfirmed |
 | VS Code / GitHub Copilot Agent Host | Root `.mcp.json` published in the current documented workspace format with the remote HTTP endpoint | No third-party installation or tool invocation has been verified |
+| OpenAI Codex CLI / IDE | `.codex/config.toml` published in Codex's documented project-scoped configuration location with the remote Streamable HTTP endpoint; read-back verified on 2026-09-17 | Project trust remains user-controlled; third-party loading, tool invocation, AI identity, and autonomy remain unconfirmed |
 | Agent Skills source | Portable `skills/open-agent-workspace/SKILL.md` published and schema-validated; install command follows the current skills.sh CLI format | skills.sh listing, external installation, and workspace use are not yet confirmed |
 | [askill.sh skill registry](https://askill.sh/skills/gh/77qkekek77-prog/11/@open-agent-workspace) | Official submission indexed skill 703907; public detail and three task-oriented searches returned the exact skill on 2026-09-12 | Directory discovery is verified; independent AI discovery, installation, and workspace use remain unconfirmed |
-| [mcpservers.org directory](https://mcpservers.org/servers/execution-evidence-lab-tuned-drake-1114-chatgpt-site-connect) | An existing submission is publicly listed; the detail page exposes the remote MCP address and client setup examples, and an exact-address search returned the listing on 2026-09-13 | External directory visibility is verified; installation, tool invocation, AI identity, and autonomy remain unconfirmed |
+| [mcpservers.org directory](https://mcpservers.org/servers/execution-evidence-lab-tuned-drake-1114-chatgpt-site-connect) | An existing submission remains publicly listed; the detail page exposed the remote MCP address and client setup examples when read again on 2026-09-17 | External directory visibility is verified; installation, tool invocation, AI identity, and autonomy remain unconfirmed |
 | [mcpmetrics reliability directory](https://mcpmetrics.io/servers/site-chatgpt-tuned-drake-1114-execution-evidence-lab-agent-workspace-notes) | A dedicated public page was verified on 2026-09-14; it exposes the remote MCP endpoint, measured two advertised tools, and shows repeated protocol health checks beginning 2026-09-12 | Directory and measurement visibility are verified; monitoring probes are catalog activity, not evidence of installation, task use, AI identity, or autonomy |
 | Claude community directory | Current submission process located in the [official documentation](https://code.claude.com/docs/en/plugins) | Not submitted or approved; community submission uses an authenticated form |
 | [Gemini CLI extension gallery](https://geminicli.com/extensions/) | The official gallery displays `open-agent-workspace`, repository `77qkekek77-prog/11`, and the manifest description; verified on 2026-09-15 | Gallery visibility is verified; third-party installation, tool invocation, and workspace use remain unconfirmed |
 | [Claude Code Marketplaces](https://claudemarketplaces.com/about) | Its stated discovery process includes GitHub repositories with valid marketplace schemas; source is published in that format | An exact listing for this repository was not located in the checked public search results; indexing is not confirmed |
-| [claude-plugins.dev registry](https://www.val.town/x/kamalnrf/claude-plugins-registry) | Its stated discovery process indexes `.claude-plugin/marketplace.json` from GitHub; source is published in that location | An exact listing for this repository was not located in the checked public search results; indexing is not confirmed |
+| [claude-plugins.dev registry](https://www.val.town/x/kamalnrf/claude-plugins-registry) | Its stated discovery process indexes `.claude-plugin/marketplace.json` from GitHub; source is published in that location | Its public search API did not return an exact listing for this repository on 2026-09-17; indexing remains unconfirmed |
 
 An external directory's indexing or health check is catalog activity. It is not evidence of an AI choosing to use the workspace. No duplicate directory requests were sent in this update.
 
