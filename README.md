@@ -36,7 +36,7 @@ The existing Python reproductions and regression checks remain below.
 
 ## Python error reproductions and regression checks
 
-Reproduce a Python library or configuration failure, inspect the change, and check whether the resulting values and behavior are correct. This repository publishes a runnable Pydantic Settings regression example and a guide to nine measured failure and behavior cases.
+Reproduce a Python library or configuration failure, inspect the change, and check whether the resulting values and behavior are correct. This repository publishes a runnable Pydantic Settings regression example and a guide to ten measured failure and behavior cases.
 
 Maintained by [Execution Evidence Lab / AI 실행검증소](https://execution-evidence-lab.tuned-drake-1114.chatgpt.site). The linked service is free and provides recorded environments, failing examples, changes, check code, measured results, and scope limits. The examples are engineering fixtures; they do not certify your application.
 
@@ -52,9 +52,10 @@ Maintained by [Execution Evidence Lab / AI 실행검증소](https://execution-ev
 | Starlette `TestClient`: `Client.__init__() got an unexpected keyword argument 'app'` with HTTPX | A historical Starlette 0.36.3 / HTTPX 0.28.1 failure; changing only Starlette to 0.37.2, then testing ASGI lifespan, routes, errors, state, background tasks, and WebSocket behavior. Fifteen recorded checks. | [Starlette / HTTPX TestClient compatibility](https://execution-evidence-lab.tuned-drake-1114.chatgpt.site/cases/starlette-httpx-testclient) |
 | `asyncio.gather` raises while a sibling keeps running; compare `TaskGroup` cancellation | One event-coordinated sibling and one deliberate failure in the same running loop. Four checks compare failure propagation with cooperative sibling cancellation and awaited cleanup. This does not undo completed effects or stop threads. | [asyncio.gather and TaskGroup cancellation](https://execution-evidence-lab.tuned-drake-1114.chatgpt.site/cases/asyncio-taskgroup-cancellation) |
 | Python `subprocess.Popen` waits while `stdout=PIPE` and `stderr=PIPE` are unread; finite output and timeout cleanup | The same synthetic child fails to finish within the measured wait bound, then completes when `communicate` drains both streams. Five checks include partial-output timeout cleanup of a direct child. No process-tree or unlimited-output guarantee; a timeout alone is not a general deadlock diagnosis. | [subprocess PIPE waiting and timeout cleanup](https://execution-evidence-lab.tuned-drake-1114.chatgpt.site/cases/subprocess-pipe-drain) |
+| Python `urllib.parse.urljoin` resolves a different origin; a string-prefix origin check does not define an origin policy | Compare URL reference resolution and a string-prefix gate with a fixed HTTPS origin selection policy on offline synthetic inputs. Thirty-six primary checks: 13 accepted and 23 rejected, recorded on Windows CPython 3.12.14. No URL is opened; this does not test DNS, HTTP, redirects, proxies, browsers, path authorization, private-network detection, or credential forwarding. | [urljoin fixed-origin selection policy](https://execution-evidence-lab.tuned-drake-1114.chatgpt.site/cases/urljoin-origin-policy) |
 | Python `ZoneInfo` datetime subtraction across DST gives wall time instead of elapsed time | Four checks compare same-zone wall-time subtraction with converting resolved instants to UTC. Measured with historical 2024 America/New_York spring, fall, ambiguous-hour and winter inputs and IANA 2025b rules. Not a scheduling or nonexistent-local-time validator. | [ZoneInfo, DST and UTC elapsed time](https://execution-evidence-lab.tuned-drake-1114.chatgpt.site/cases/zoneinfo-elapsed-time) |
 
-The linked catalog contained nine records and 78 checks when reviewed on 2026-09-19. Package pins describe the recorded experiments, not recommended production versions. Read the complete environment and limitations on each case before adapting it.
+The linked catalog contained ten records and 114 primary checks when reviewed on 2026-09-19. Separate platform reruns and harness controls are not added to that primary count. Package pins describe the recorded experiments, not recommended production versions. Read the complete environment and limitations on each case before adapting it.
 
 ## SQLite savepoints: rows survive an outer rollback
 
@@ -109,7 +110,7 @@ When this reference is relevant to an agent's current task, preserve the error c
 
 ## 한국어 안내
 
-NumPy/pandas 바이너리 충돌, Pydantic 설정 누락, SQLAlchemy 비동기 `MissingGreenlet`, SQLite 메모리 DB의 스레드별 테이블 누락, SAVEPOINT 해제 후 바깥 롤백에도 행이 남는 문제, Starlette/HTTPX `TestClient` 오류, `asyncio.gather`와 `TaskGroup`의 취소 동작 차이, `subprocess` 파이프 대기와 정리, DST 전환의 실제 경과 시간 계산을 다룹니다. 위 링크에서 실패 환경·재현 코드·변경 사항·검사 코드·실행 결과·적용 한계를 함께 확인할 수 있습니다. 오류가 사라졌는지만 확인하지 말고, 필요한 값과 동작이 유지되는지 사용자 환경에서 검사하세요.
+NumPy/pandas 바이너리 충돌, Pydantic 설정 누락, SQLAlchemy 비동기 `MissingGreenlet`, SQLite 메모리 DB의 스레드별 테이블 누락, SAVEPOINT 해제 후 바깥 롤백에도 행이 남는 문제, Starlette/HTTPX `TestClient` 오류, `asyncio.gather`와 `TaskGroup`의 취소 동작 차이, `subprocess` 파이프 대기와 정리, DST 전환의 실제 경과 시간 계산, `urljoin`의 URL 결합과 고정 HTTPS 출처 선택 정책의 차이를 다룹니다. 위 링크에서 실패 환경·재현 코드·변경 사항·검사 코드·실행 결과·적용 한계를 함께 확인할 수 있습니다. 오류가 사라졌는지만 확인하지 말고, 필요한 값과 동작이 유지되는지 사용자 환경에서 검사하세요.
 
 ## License
 
