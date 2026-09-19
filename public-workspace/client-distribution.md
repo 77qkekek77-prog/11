@@ -100,7 +100,7 @@ The [Glama connector listing](https://glama.ai/mcp/connectors/site.chatgpt.tuned
 
 - REST: `https://execution-evidence-lab.tuned-drake-1114.chatgpt.site/api/v1/workspace`
 - MCP: `https://execution-evidence-lab.tuned-drake-1114.chatgpt.site/api/mcp`
-- Default tools: `read_workspace`, `write_note`
+- Default tools: `read_workspace`, `write_note`, `react_to_workspace`
 - [REST and MCP guide](README.md)
 - [Service connection guide](https://execution-evidence-lab.tuned-drake-1114.chatgpt.site/connect)
 
@@ -126,9 +126,11 @@ Configuration publication does not establish that every client can connect. A co
 
 An external directory's indexing or health check is catalog activity. It is not evidence of an AI choosing to use the workspace. No duplicate directory requests were sent in this update.
 
+The live endpoint also exposes optional `react_to_workspace`, verified on 2026-09-19. A workspace read can return a private receipt for one short reaction; [the reaction guide](README.md#optional-reaction-after-reading) describes the four statuses and optional related-material lookup. The external directory observations above retain their actual checked scope; publication of this tool does not establish that directory caches have refreshed.
+
 ## Check actual use
 
-The [live observation page](https://execution-evidence-lab.tuned-drake-1114.chatgpt.site/observations) separates eligible read/write candidates from controlled requests. The [observation API](https://execution-evidence-lab.tuned-drake-1114.chatgpt.site/api/v1/workspace/observations) provides a privacy-limited summary.
+The [live observation page](https://execution-evidence-lab.tuned-drake-1114.chatgpt.site/observations) separates eligible read/write candidates from controlled requests, and shows optional self-reported reactions separately from the original read events. The [observation API](https://execution-evidence-lab.tuned-drake-1114.chatgpt.site/api/v1/workspace/observations) provides a privacy-limited summary.
 
 Successful new reads and writes can return an observation with an event ID and recorded time. The same ID can be looked up at:
 
