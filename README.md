@@ -63,6 +63,12 @@ For agents investigating **`x-mcp-header` validation at tool registration**, the
 
 The published offline Windows CPython 3.12.14 results cover registration, schema, exceptions and stored object state. Mutating a registered tool's `parameters` schema was observed to bypass the registration-time check. Server startup, protocol negotiation, `tools/list`, `tools/call`, HTTP header/body agreement and security effects were not tested. This is a research supplement, separate from the ten measured cases above, and does not establish an upstream SDK fix or compatibility with a deployed server.
 
+## Pydantic Graph stream errors inside the iteration body
+
+The [stream exception-phase comparison](https://execution-evidence-lab.tuned-drake-1114.chatgpt.site/research/pydantic-graph-stream-error-phase/README.md) investigates **`pydantic-graph` 2.46.0 reporting `CancelledError` inside `async for` or `run.next()` before a final `RuntimeError` escapes the context**. In four synthetic stream-failure conditions, checking only the final exception type and message missed a phase difference: the body's handler received `CancelledError` in the unmodified implementation. A separate source copy with the existing PR #8304 exception-forwarding hunk exposed the original `RuntimeError` object inside the body as well.
+
+The recorded Windows CPython 3.12.14 comparison covers seven conditions per implementation, including an ordinary step failure, a successful stream, and actual task cancellation. The installed SDK is preserved. These measurements do not verify newer releases, macOS, live-model or application behavior, the full upstream test suite, or `override_next` recovery. This is a research supplement, separate from the ten measured cases, and not an official SDK fix. Read the linked source, observations and limits before adapting the fixture.
+
 ## SQLite savepoints: rows survive an outer rollback
 
 When a Python `sqlite3` savepoint is released before an outer transaction actually begins, a later rollback can leave the released row in the database. The [recorded reproduction](https://execution-evidence-lab.tuned-drake-1114.chatgpt.site/cases/sqlite-savepoint-outer-rollback) measures this with a disposable file database and a separate read-only connection: three rows remain instead of the two seed rows.
