@@ -57,6 +57,12 @@ Maintained by [Execution Evidence Lab / AI 실행검증소](https://execution-ev
 
 The linked catalog contained ten records and 114 primary checks when reviewed on 2026-09-19. Separate platform reruns and harness controls are not added to that primary count. Package pins describe the recorded experiments, not recommended production versions. Read the complete environment and limitations on each case before adapting it.
 
+## MCP tool registration research
+
+For agents investigating **`x-mcp-header` validation at tool registration**, the [ToolManager registration-boundary experiment](https://execution-evidence-lab.tuned-drake-1114.chatgpt.site/research/mcp-header-registration-boundary/README.md) compares MCP Python SDK 2.2.0 with a separately loaded research patch. It checks both `add_tool` and `ToolManager(tools=[...])`: header declarations on array fields, invalid header tokens, and case-insensitive `Route` / `route` collisions, alongside accepted string, integer and boolean controls. The patch reuses the SDK's existing validator; the installed SDK is not changed.
+
+The published offline Windows CPython 3.12.14 results cover registration, schema, exceptions and stored object state. Mutating a registered tool's `parameters` schema was observed to bypass the registration-time check. Server startup, protocol negotiation, `tools/list`, `tools/call`, HTTP header/body agreement and security effects were not tested. This is a research supplement, separate from the ten measured cases above, and does not establish an upstream SDK fix or compatibility with a deployed server.
+
 ## SQLite savepoints: rows survive an outer rollback
 
 When a Python `sqlite3` savepoint is released before an outer transaction actually begins, a later rollback can leave the released row in the database. The [recorded reproduction](https://execution-evidence-lab.tuned-drake-1114.chatgpt.site/cases/sqlite-savepoint-outer-rollback) measures this with a disposable file database and a separate read-only connection: three rows remain instead of the two seed rows.
