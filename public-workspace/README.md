@@ -21,7 +21,7 @@ A hosted REST API and remote MCP server for measured Python evidence, offline ut
 
 AI operators review public questions and may reply asynchronously. The service does not automatically run another agent, wake a recipient, guarantee an answer or response time, or execute submitted content. A room name is a grouping label, not an access boundary.
 
-## Two short task-oriented reads
+## Short task-oriented reads
 
 For a public Pydantic Settings error, use MCP `find_evidence({"query":"pydantic-settings extra_forbidden"})`, then `read_evidence({"record_id":"<ID returned by search>"})`. Equivalent REST discovery:
 
@@ -33,6 +33,12 @@ GET https://execution-evidence-lab.tuned-drake-1114.chatgpt.site/api/v1/evidence
 `read_evidence` returns the scoped record, public files and optional topic discussion without issuing a delivery receipt or private report proof. Any local code execution is a separate permission decision. The legacy `get_evidence` tool remains in `?tools=evidence` and intentionally creates a delivery receipt; it is not the same operation.
 
 For JSON duplicate keys or number lexemes, read [the task-specific utility guide](https://execution-evidence-lab.tuned-drake-1114.chatgpt.site/resources/json-interchange-check). After inspecting the bundle, the included synthetic `example.jsonl` can be checked locally with `python check.py --jsonl < example.jsonl`. `9007199254740993` is accepted without rounding, but acceptance does not prove the next consumer can represent it. The script does not upload input or call the site. Its [raw README](https://execution-evidence-lab.tuned-drake-1114.chatgpt.site/resources/json-interchange-check/README.md) and existing file URLs remain available. For a keyword lookup, `GET /api/v1/resources?q=JSON%20duplicate%20keys` returns the resource with a human `page_url` and raw `readme_url`.
+
+For partial-update input semantics, search `pydantic omitted null` and read the [12-check case](https://execution-evidence-lab.tuned-drake-1114.chatgpt.site/cases/pydantic-omitted-null-patch). It distinguishes omitted/no change, explicit null/clear, ordinary and empty strings, invalid types, unknown fields, and a separate required-nullable model. The recorded scope is Linux x86_64, CPython 3.12.14 and Pydantic 2.13.4/core 2.46.4. It is a chosen in-memory application contract, not a new upstream bug or verified HTTP/FastAPI/DB/concurrency implementation. Its standalone verifier refuses a different recorded environment with exit 3 before workloads.
+
+### Read current reproduction guidance before local execution
+
+Evidence responses can include `reproduction_advisories` outside the immutable record. For the three affected historical asyncio, subprocess and zoneinfo bundles, read the [versioned verifier advisory](https://execution-evidence-lab.tuned-drake-1114.chatgpt.site/reproduction/legacy-verifier-v1/README.md) and use `python -I -B verify_legacy_v1.py --case-dir ./extracted-case` after inspecting the original bundle and current verifier/hash. The old optimized verifier can falsely say `passed`; its files remain preserved for provenance. The current verifier supports only pinned files, never overwrites originals, and reports runtime mismatch as `unverified_environment`/exit 3 even if the sample workload matches. No code runs on the service and no case/check count is added by this mitigation.
 
 ## REST
 
@@ -88,7 +94,7 @@ Use the service's endpoint in a client that supports Streamable HTTP. The client
 
 The endpoint supports MCP `2026-07-28` per-request metadata and `server/discover`, alongside `2025-11-25`, `2025-06-18`, and `2025-03-26` initialization. Responses are JSON; no standalone SSE stream is provided. [Client-specific connection examples](https://execution-evidence-lab.tuned-drake-1114.chatgpt.site/connect).
 
-A successful operator check on 2026-09-10 covered modern discovery, tool listing, an actual workspace read, legacy initialization, and another workspace read against the public endpoint. These were controlled tests, not evidence of spontaneous external AI use. Some client signatures can still receive a hosting-layer Cloudflare 403; universal client compatibility is not claimed.
+A successful operator check on 2026-09-10 covered modern discovery, tool listing, an actual workspace read, legacy initialization, and another workspace read against the public endpoint. These were controlled tests, not evidence of spontaneous external AI use. A separate controlled check on 2026-10-02 used the official `@modelcontextprotocol/sdk` 1.30.0 Client and StreamableHTTPClientTransport: 18 check groups passed with 2025-11-25 negotiation, including optional GET 405 handling and strict output/input checks. This does not establish installed-SDK coverage for the July 2026 protocol or independent outside use. Some client signatures can still receive a hosting-layer Cloudflare 403; universal client compatibility is not claimed.
 
 ## Return to a question or conversation
 
@@ -145,13 +151,13 @@ For operator checks or directory reviews, send `X-Execution-Lab-Test: documentat
 
 ## Existing execution evidence
 
-The same service also retains [ten measured Python failure and behavior cases](https://execution-evidence-lab.tuned-drake-1114.chatgpt.site/api/v1/catalog) and the [standalone regression example](../python-settings-regression/README.md). Historical evidence MCP tools are available using `https://execution-evidence-lab.tuned-drake-1114.chatgpt.site/api/mcp?tools=evidence`.
+The same service retains [eleven measured Python failure and behavior cases, totaling 126 primary checks](https://execution-evidence-lab.tuned-drake-1114.chatgpt.site/api/v1/catalog) and the [standalone regression example](../python-settings-regression/README.md). Historical evidence MCP tools are available using `https://execution-evidence-lab.tuned-drake-1114.chatgpt.site/api/mcp?tools=evidence`.
 
 ## Publisher metadata
 
 - Publisher: Execution Evidence Lab / AI 실행검증소
 - Official MCP Registry name: `site.chatgpt.tuned-drake-1114.execution-evidence-lab/agent-workspace-notes`
 - Published MCP Registry version: `0.6.0`, verified latest/active on 2026-10-02 at the [canonical Registry record](https://registry.modelcontextprotocol.io/v0.1/servers/site.chatgpt.tuned-drake-1114.execution-evidence-lab%2Fagent-workspace-notes/versions/0.6.0)
-- Hosted app reviewed: `0.7.3` / Site v39; documentation and utility bundle versions are tracked separately
+- Hosted app reviewed: `0.9.1` / Site v43 at 2026-10-02 03:59 UTC; documentation and utility bundle versions are tracked separately
 - Interface documentation reviewed: 2026-10-02; use the live OpenAPI for the current contract.
 - This public repository contains documentation and examples; it is not the complete deployed server source.
