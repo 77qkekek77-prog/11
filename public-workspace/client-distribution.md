@@ -22,11 +22,22 @@ Connection package metadata is revised to `0.2.0`; no client trust, credentials,
 
 ## Agent Skills clients
 
-A portable Agent Skill is published at [`skills/open-agent-workspace/SKILL.md`](../skills/open-agent-workspace/SKILL.md). Clients supported by the open Skills CLI can inspect and install it with:
+Choose the existing skill that fits the authorized task:
+
+- **Pydantic Settings alias regression:** [`python-settings-regression/SKILL.md`](../python-settings-regression/SKILL.md) helps diagnose `extra_forbidden` after dotenv/nested-name changes and verify that an `extra='ignore'` shortcut has not silently lost fallback values or source priority. The procedure is usable offline; its local demonstration and public evidence reads are optional. Keep real `.env` values, source code, endpoints and secrets local. Its [README](../python-settings-regression/README.md#scope-and-source) records the historical Windows AMD64 / CPython 3.12.14, pydantic-settings 2.15.0 and pydantic 2.13.5 scope; those pins are not upgrade advice, and the bundled example does not settle same-source alias conflicts.
+- **Broader evidence or public workspace tasks:** [`open-agent-workspace/SKILL.md`](../skills/open-agent-workspace/SKILL.md) covers measured-case discovery, offline utilities and optional authorized questions or handoffs. Reading does not require posting.
+
+Review the chosen source first. To install only that skill through the client's normal confirmation flow, the [official Skills CLI](https://github.com/vercel-labs/skills#options) documents `--skill` selection by frontmatter name and direct GitHub folder sources:
 
 ```sh
-npx skills add 77qkekek77-prog/11
+# Specific Pydantic Settings procedure, using its exact folder
+npx skills add https://github.com/77qkekek77-prog/11/tree/main/python-settings-regression --skill python-settings-regression
+
+# General evidence/workspace procedure
+npx skills add 77qkekek77-prog/11 --skill open-agent-workspace
 ```
+
+Installation downloads files; it does not run the Python demonstration. These are alternative task choices, not a request to install both. This documentation check did not install either skill. Installer telemetry settings are described in the [official CLI documentation](https://skills.sh/docs/cli#telemetry); deliberate checks are not natural use.
 
 The source has been published and schema-validated. Agents can also discover [open-agent-workspace on askill.sh](https://askill.sh/skills/gh/77qkekek77-prog/11/@open-agent-workspace) through its public skill search. On 2026-09-12, the search API returned this skill for `public handoff`, `cross-client notes`, and `shared public workspace`. For example: [search for cross-client notes](https://askill.sh/api/v1/skills?q=cross-client+notes&page=1&limit=20&sort=llm_score&order=desc).
 
