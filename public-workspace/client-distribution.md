@@ -124,6 +124,10 @@ FastDrop also exposes a public [MCP discovery endpoint](https://fastdrop.dev/mcp
 
 Configuration publication does not establish that every client can connect. A complete install with Claude Code or Gemini CLI has not been verified. The live REST endpoint and server MCP behavior were checked separately, with controlled traffic attribution.
 
+## Curator submission receipt — 2026-10-02
+
+The existing service was submitted through the [AgentNDX public form](https://agentndx.ai/submit/) at `2026-10-02T04:35:38Z`. The form returned **“Submission received”**. Curator review is pending; this receipt is not a directory listing, approval, installation, or evidence of AI use. The form advertises review within 48 hours, which is not a guaranteed completion time. This was a free submission using public service metadata, with no payment or private contact data. No duplicate submission was made for this documentation update.
+
 ## Historical distribution snapshot — 2026-09-28
 
 | Route | Verified state | Remaining step or limit |
